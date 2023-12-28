@@ -128,7 +128,7 @@ function getGenderDescription($persons){
     $women_result = round($women/$total, 2);
     $undefined_result = round($undefined/$total, 2);
 
-    echo 'Мужчины - '.$men_result.'%<br/>Женщины - '.$women_result.'%<br/>Не удалось определить - '.$undefined_result.'%<br/>';
+    return 'Мужчины - '.$men_result.'%<br/>Женщины - '.$women_result.'%<br/>Не удалось определить - '.$undefined_result.'%<br/>';
 }
 
 // Приводим в верхний регистр первую букву, остальные строчные
@@ -155,8 +155,8 @@ function getPerfectPartner($surname, $name, $patronymic, $persons){
     // Опредеяем пол
     $gender = getGenderFromName($full_name);
     if ($gender === 'UNDEFINED'){
-        echo 'Невозможно определить пол для '.getShortName($full_name).'<br/>';
-        return;
+        return 'Невозможно определить пол для '.getShortName($full_name).'<br/>';
+        
     }
 
     // Ищем идеального партнера
@@ -181,10 +181,10 @@ function getPerfectPartner($surname, $name, $patronymic, $persons){
     }
 
     if ($found_partner){
-        echo getShortName($full_name).' + '.getShortName($persons[$partner_index]['fullname']).' = <br/><span style="color: red;">&hearts;</span> Идеально на '.randomPct().' <span style="color: red;">&hearts;</span>';
+        return getShortName($full_name).' + '.getShortName($persons[$partner_index]['fullname']).' = <br/><span style="color: red;">&hearts;</span> Идеально на '.randomPct().' <span style="color: red;">&hearts;</span>';
     }
     else{
-        echo 'Для '.getShortName($full_name).' Не найдено пары...';
+        return 'Для '.getShortName($full_name).' Не найдено пары...';
     }
 }
 
@@ -199,13 +199,13 @@ foreach ($persons as $i=>$person){
 
 // Гендерный состав аудитории
 echo '<br/><br/>Гендерный состав аудитории:<br/>';
-getGenderDescription($persons);
+echo getGenderDescription($persons);
 
 // Поиск идеальной пары
 echo '<br/><br/>Поиск идеальной пары для: АНТОНИНА ФЕДОРОВНА СИМОШКИНА:<br/>';
-getPerfectPartner('СИМОШКИНА', 'АНТОНИНА', 'ФЕДОРОВНА', $persons);
+echo getPerfectPartner('СИМОШКИНА', 'АНТОНИНА', 'ФЕДОРОВНА', $persons);
 echo '<br/><br/>Поиск идеальной пары для: ПетР Джельсоминович БУБА:<br/>';
-getPerfectPartner('БУБА', 'ПетР', 'Джельсоминович', $persons);
+echo getPerfectPartner('БУБА', 'ПетР', 'Джельсоминович', $persons);
 
 
    
